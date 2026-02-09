@@ -1,0 +1,97 @@
+# ==============================================
+# BCA IV Client-Side Scripting Repository
+# GitHub Classroom .gitignore
+# ==============================================
+
+# Internal Documentation (Not for Students)
+.internal/
+.internal/**/*
+
+# Copilot Instructions (Author-only, not for student access)
+.github/copilot-instructions.md
+
+# VS Code Editor Settings (Local to developer)
+.vscode/
+.vscode/**/*
+
+# Node.js Dependencies (Install locally, don't commit)
+node_modules/
+package-lock.json
+npm-debug.log
+npm-error.log
+yarn.lock
+
+# Operating System Files
+.DS_Store                       # macOS
+Thumbs.db                       # Windows
+*.swp                           # Vim swap files
+*.swo                           # Vim swap files
+*~                              # Backup files
+
+# Editor Temporary Files
+*.swp                           # Vim
+*.swo                           # Vim
+*~                              # Emacs
+.~*.docx                        # Word temporary files
+.~*.xlsx                        # Excel temporary files
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+
+# Log Files
+*.log
+logs/
+logs/**/*
+
+# IDE Settings (IntelliJ, PyCharm, etc.)
+.idea/
+.idea/**/*
+*.iml
+*.iws
+*.ipr
+
+# Build Output (if using bundlers)
+dist/
+build/
+out/
+
+# Test Coverage Reports
+coverage/
+.nyc_output/
+
+# Temporary Files
+temp/
+tmp/
+*.tmp
+
+# Compiled Python Files (if mixed environment)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+
+# IDE-Specific
+.vscode-test
+.run
+
+# ==============================================
+# EXCEPTION: Files That SHOULD Be Committed
+# ==============================================
+# The following are important course files:
+# - .github/workflows/ (if used for CI/CD)
+# - .gitattributes (if needed for line endings)
+# - README.md
+# - Curriculum/ folder (all student materials)
+# - LICENSE
+
+# ==============================================
+# DO NOT COMMIT:
+# - Assignment answers (if storing anywhere)
+# - Student personal information
+# - API keys or credentials
+# - Large binary files (use Git LFS if needed)
+# - .docx or .xlsx files (use markdown instead)
+# ==============================================
