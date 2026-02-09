@@ -204,6 +204,73 @@ console.log(average);  // 7.5
 
 ---
 
+### 7. Script Data Set — Higher-Order Functions in Action
+
+The textbook *Eloquent JavaScript* introduces a concept called the **script data set** — a collection of data about the world's writing systems (scripts). This is a great example of using `filter()`, `map()`, and `reduce()` together on real data.
+
+A **script** (in this context) refers to a writing system like Latin (used for English), Devanagari (used for Hindi), Cyrillic (used for Russian), Han (used for Chinese), etc. Each script has properties like its name, the range of character codes it covers, and the direction it's written in.
+
+#### Working with a Script Data Set
+
+```javascript
+// Simplified script data (in real code, this would be a larger dataset)
+const SCRIPTS = [
+    { name: "Latin",      living: true,  direction: "ltr", ranges: [[65, 90], [97, 122]],    year: -700 },
+    { name: "Devanagari", living: true,  direction: "ltr", ranges: [[2304, 2431]],            year: -200 },
+    { name: "Arabic",     living: true,  direction: "rtl", ranges: [[1536, 1791]],            year: 400 },
+    { name: "Cyrillic",   living: true,  direction: "ltr", ranges: [[1024, 1279]],            year: 800 },
+    { name: "Gothic",     living: false, direction: "ltr", ranges: [[66352, 66383]],          year: 350 },
+    { name: "Coptic",     living: false, direction: "ltr", ranges: [[994, 1023]],             year: 200 },
+    { name: "Han",        living: true,  direction: "ltr", ranges: [[19968, 40959]],          year: -1100 }
+];
+
+// Filter: Find living scripts
+const living = SCRIPTS.filter(s => s.living);
+console.log("Living scripts:", living.map(s => s.name));
+// ["Latin", "Devanagari", "Arabic", "Cyrillic", "Han"]
+
+// Filter: Right-to-left scripts
+const rtl = SCRIPTS.filter(s => s.direction === "rtl");
+console.log("RTL scripts:", rtl.map(s => s.name));
+// ["Arabic"]
+
+// Reduce: Find the oldest script
+const oldest = SCRIPTS.reduce((a, b) => a.year < b.year ? a : b);
+console.log("Oldest script:", oldest.name, "(year:", oldest.year + ")");
+// "Han" (year: -1100)
+
+// Reduce: Count scripts by direction
+const directionCount = SCRIPTS.reduce((acc, s) => {
+    acc[s.direction] = (acc[s.direction] || 0) + 1;
+    return acc;
+}, {});
+console.log("By direction:", directionCount);
+// { ltr: 6, rtl: 1 }
+```
+
+#### Finding a Script by Character Code
+
+```javascript
+function characterScript(code) {
+    for (let script of SCRIPTS) {
+        for (let [from, to] of script.ranges) {
+            if (code >= from && code <= to) {
+                return script;
+            }
+        }
+    }
+    return null;  // No script found
+}
+
+console.log(characterScript(65));    // Latin (A)
+console.log(characterScript(2310));  // Devanagari (आ)
+console.log(characterScript(1576));  // Arabic (ب)
+```
+
+> **Why this matters:** The script data set exercise demonstrates how `filter()`, `map()`, and `reduce()` work together to analyze real-world data — filtering by criteria, transforming entries, and aggregating statistics. This is the same pattern used in data analytics, business intelligence, and API data processing.
+
+---
+
 ## ✅ PRACTICAL SESSION (90 minutes)
 
 ### Exercise 2.1: Basic filter()

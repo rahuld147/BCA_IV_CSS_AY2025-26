@@ -8,6 +8,60 @@
 
 ## 📚 THEORY SESSION (90 minutes)
 
+### 0. Abstraction and Abstracting Repetition
+
+Before learning higher-order functions, we need to understand the concept of **abstraction** — one of the most important ideas in programming.
+
+**Abstraction** means hiding complex details behind a simpler interface. When you use `console.log("Hello")`, you don't need to know how your computer sends pixels to the screen — that complexity is **abstracted away**. Abstraction lets you think at a higher level, focusing on *what* you want to do rather than *how* every detail works.
+
+#### Abstracting Repetition
+
+Consider a common pattern: doing something $N$ times.
+
+```javascript
+// Without abstraction — repetitive code
+console.log(0);
+console.log(1);
+console.log(2);
+
+// Slight abstraction — a loop
+for (let i = 0; i < 3; i++) {
+    console.log(i);
+}
+
+// Better abstraction — a function
+function repeatLog(n) {
+    for (let i = 0; i < n; i++) {
+        console.log(i);
+    }
+}
+repeatLog(3);
+```
+
+But what if we don't always want to `console.log`? What if sometimes we want to do different things? This is where **higher-order functions** come in — we can abstract the **action** itself by passing it as a parameter:
+
+```javascript
+// Full abstraction — the action is a parameter
+function repeat(n, action) {
+    for (let i = 0; i < n; i++) {
+        action(i);
+    }
+}
+
+// Now we can do ANYTHING n times:
+repeat(3, console.log);           // Logs 0, 1, 2
+repeat(3, i => console.log("*".repeat(i + 1)));  // Logs *, **, ***
+
+// We can even collect results:
+const labels = [];
+repeat(5, i => labels.push("Unit " + (i + 1)));
+console.log(labels);  // ["Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"]
+```
+
+> **Key insight:** Higher-order functions are the natural next step in abstraction. Instead of abstracting over *values*, they abstract over **actions** (functions). This is the foundation of functional programming.
+
+---
+
 ### 1. What is a Higher-Order Function?
 
 A **higher-order function** is a function that either:
@@ -222,6 +276,71 @@ const userInfo = users.map(u => ({
 console.log(userInfo);
 // [{fullName: "Alice", contact: "alice@example.com"}, ...]
 ```
+
+---
+
+### 7. Strings and Character Codes
+
+Strings in JavaScript are sequences of **Unicode characters**. Each character has a numeric code called a **code point** — a unique number assigned to every character in the Unicode standard (which covers characters from virtually every writing system in the world).
+
+#### Character Codes
+
+```javascript
+// charCodeAt() — returns the UTF-16 code unit at a given index
+console.log("A".charCodeAt(0));    // 65
+console.log("B".charCodeAt(0));    // 66
+console.log("a".charCodeAt(0));    // 97
+console.log("0".charCodeAt(0));    // 48
+console.log("@".charCodeAt(0));    // 64
+
+// String.fromCharCode() — creates a character from its code
+console.log(String.fromCharCode(65));   // "A"
+console.log(String.fromCharCode(97));   // "a"
+console.log(String.fromCharCode(9786)); // "☺"
+```
+
+#### codePointAt() — For Full Unicode Support
+
+Some characters (like emojis and characters from non-Latin scripts) require more than one UTF-16 code unit. `codePointAt()` handles these correctly:
+
+```javascript
+// Regular characters — same as charCodeAt
+console.log("A".codePointAt(0));      // 65
+
+// Emoji characters (beyond basic plane)
+const emoji = "🐴";
+console.log(emoji.charCodeAt(0));     // 55357 (incorrect — only half)
+console.log(emoji.codePointAt(0));    // 128052 (correct full code point)
+
+// String.fromCodePoint() creates from full code point
+console.log(String.fromCodePoint(128052));  // "🐴"
+```
+
+#### Practical: ROT13 Cipher Using Character Codes
+
+**ROT13** is a simple cipher that shifts each letter 13 positions in the alphabet. It uses character codes and `map()` together:
+
+```javascript
+function rot13(text) {
+    return [...text].map(char => {
+        const code = char.charCodeAt(0);
+        // Uppercase letters (A=65 to Z=90)
+        if (code >= 65 && code <= 90) {
+            return String.fromCharCode(((code - 65 + 13) % 26) + 65);
+        }
+        // Lowercase letters (a=97 to z=122)
+        if (code >= 97 && code <= 122) {
+            return String.fromCharCode(((code - 97 + 13) % 26) + 97);
+        }
+        return char;  // Non-letter characters unchanged
+    }).join("");
+}
+
+console.log(rot13("Hello World"));   // "Uryyb Jbeyq"
+console.log(rot13("Uryyb Jbeyq"));   // "Hello World"  — applying twice reverses it!
+```
+
+> **Connection to Higher-Order Functions:** Notice how `map()` is used on an array of characters (`[...text]` spreads a string into individual characters). This is a real-world example of combining string manipulation with higher-order functions.
 
 ---
 

@@ -126,6 +126,131 @@ function processData(data) {
 
 ---
 
+### 4. Composability
+
+**Composability** is the ability to combine simple functions together to build more complex operations. Instead of writing one large function that does everything, you compose small, focused functions — each doing one thing well — and chain them together.
+
+The `map()`, `filter()`, and `reduce()` methods naturally support composability because each one returns a value that can feed directly into the next operation.
+
+#### Why Composability Matters
+
+```javascript
+// ❌ WITHOUT composability — one big function doing everything
+function processStudentData(students) {
+    const results = [];
+    for (let i = 0; i < students.length; i++) {
+        if (students[i].marks >= 50) {
+            const average = students[i].marks;
+            const grade = average >= 90 ? "A" : average >= 80 ? "B" : "C";
+            results.push({
+                name: students[i].name.toUpperCase(),
+                grade: grade
+            });
+        }
+    }
+    results.sort((a, b) => a.name.localeCompare(b.name));
+    return results;
+}
+
+// ✅ WITH composability — chain of focused operations
+const processStudentDataComposed = students =>
+    students
+        .filter(s => s.marks >= 50)                    // Step 1: Select passing
+        .map(s => ({                                    // Step 2: Transform
+            name: s.name.toUpperCase(),
+            grade: s.marks >= 90 ? "A" : s.marks >= 80 ? "B" : "C"
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name)); // Step 3: Sort
+```
+
+#### Composing Custom Functions
+
+You can also compose your own functions by having each function take an input and return an output:
+
+```javascript
+// Small, composable functions
+const double = x => x * 2;
+const addTen = x => x + 10;
+const square = x => x * x;
+
+// Compose them manually
+const result = square(addTen(double(5)));
+// double(5) → 10, addTen(10) → 20, square(20) → 400
+
+// A compose utility function
+function compose(...fns) {
+    return value => fns.reduce((acc, fn) => fn(acc), value);
+}
+
+const transform = compose(double, addTen, square);
+console.log(transform(5));  // 400
+
+// Apply composed transformation to an array
+const numbers = [1, 2, 3, 4, 5];
+const transformed = numbers.map(compose(double, addTen));
+console.log(transformed);  // [12, 14, 16, 18, 20]
+```
+
+> **Key insight from the textbook:** Composable code is easier to understand, test, and maintain. Each piece can be verified independently. However, composability comes with a small performance cost — chaining creates intermediate arrays. For most applications this cost is negligible, but for millions of elements, a single loop may be faster.
+
+---
+
+### 5. Recognizing Text
+
+**Recognizing text** means analyzing a string to determine which writing systems (scripts) it uses. This brings together everything from Week 4: higher-order functions, character codes, and the script data set.
+
+#### Counting Characters by Script
+
+Given a text string that may contain characters from multiple writing systems, we can use `reduce()` to count how many characters belong to each script:
+
+```javascript
+// Reusing the SCRIPTS data and characterScript function from Day 2
+
+function countBy(items, groupName) {
+    const counts = [];
+    for (let item of items) {
+        const name = groupName(item);
+        const known = counts.find(c => c.name === name);
+        if (known) {
+            known.count++;
+        } else {
+            counts.push({ name, count: 1 });
+        }
+    }
+    return counts;
+}
+
+// Analyze text to determine script usage
+function textScripts(text) {
+    const scripts = countBy(text, char => {
+        const script = characterScript(char.codePointAt(0));
+        return script ? script.name : "none";
+    }).filter(entry => entry.name !== "none");
+
+    const total = scripts.reduce((n, s) => n + s.count, 0);
+
+    if (total === 0) return "No scripts found";
+
+    return scripts
+        .map(s => {
+            const percent = Math.round((s.count / total) * 100);
+            return `${percent}% ${s.name}`;
+        })
+        .join(", ");
+}
+
+// Example usage
+console.log(textScripts("Hello"));
+// "100% Latin"
+
+console.log(textScripts("Hey, مساء الخير"));
+// "35% Latin, 65% Arabic"
+```
+
+> **`countBy`** is a useful abstraction — a higher-order function that takes a grouping function and counts how many items fall into each group. It's similar to `GROUP BY` in SQL or `pandas.groupby()` in Python. This pattern appears frequently in data processing.
+
+---
+
 ## ✅ PRACTICAL SESSION (90 minutes)
 
 ### 🎉 WEEK 4 INTEGRATION PROJECT: E-Commerce Analytics Dashboard
