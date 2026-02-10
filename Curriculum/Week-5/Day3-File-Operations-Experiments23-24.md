@@ -429,10 +429,184 @@ null → isEmpty: true
 
 ---
 
-## 🎯 Experiments 23-24 Summary
+## 🔬 MANDATORY PRACTICAL EXPERIMENTS
 
-✅ **Experiment 23:** Extract and categorize file extensions
-✅ **Experiment 24:** Validate and handle undefined/null values
+### ✅ **Experiment 22: JavaScript Program to Get File Extension**
+
+**MANDATORY PRACTICAL REQUIREMENT:** Official Experiment #22 (Unit 5)
+
+Extract and identify file extensions from filenames to determine file type.
+
+<details>
+<summary><b>Solution: Method 1 - Using split() and Array Index</b></summary>
+
+```javascript
+/*
+ * Experiment 22: Get File Extension (Manual string manipulation)
+ * Extract file extension and categorize files
+ */
+
+function getFileExtension(filename) {
+    // Split by dot and get the last part
+    const parts = filename.split(".");
+    
+    if (parts.length < 2) {
+        return "";  // No extension found
+    }
+    
+    // Get last element and convert to lowercase
+    return parts[parts.length - 1].toLowerCase();
+}
+
+function getFileType(filename) {
+    const ext = getFileExtension(filename);
+    
+    // Categorize by extension
+    if (ext === "jpg" || ext === "jpeg" || ext === "png" || ext === "gif" || ext === "bmp") {
+        return "Image";
+    } else if (ext === "pdf" || ext === "doc" || ext === "docx" || ext === "xls" || ext === "xlsx") {
+        return "Document";
+    } else if (ext === "js" || ext === "py" || ext === "java" || ext === "cpp" || ext === "html") {
+        return "Code";
+    } else if (ext === "mp4" || ext === "avi" || ext === "mkv" || ext === "mov") {
+        return "Video";
+    } else if (ext === "mp3" || ext === "wav" || ext === "flac" || ext === "m4a") {
+        return "Audio";
+    } else {
+        return "Unknown";
+    }
+}
+
+function getFileInfo(filename) {
+    const extension = getFileExtension(filename);
+    const type = getFileType(filename);
+    
+    return {
+        filename: filename,
+        extension: extension,
+        type: type
+    };
+}
+
+// TEST CASES
+console.log("--- Test Case 1: Image files ---");
+const files1 = ["photo.jpg", "picture.PNG", "diagram.gif"];
+files1.forEach(f => {
+    const info = getFileInfo(f);
+    console.log("File: " + info.filename + " | Ext: " + info.extension + " | Type: " + info.type);
+});
+
+console.log("\n--- Test Case 2: Document files ---");
+const files2 = ["report.pdf", "Resume.DOCX", "data.xlsx"];
+files2.forEach(f => {
+    const info = getFileInfo(f);
+    console.log("File: " + info.filename + " | Ext: " + info.extension + " | Type: " + info.type);
+});
+
+console.log("\n--- Test Case 3: Code files ---");
+const files3 = ["script.js", "program.py", "webpage.html"];
+files3.forEach(f => {
+    const info = getFileInfo(f);
+    console.log("File: " + info.filename + " | Ext: " + info.extension + " | Type: " + info.type);
+});
+
+console.log("\n--- Test Case 4: Files with no extension ---");
+console.log("Makefile extension: '" + getFileExtension("Makefile") + "'");
+console.log("README extension: '" + getFileExtension("README") + "'");
+
+console.log("\n--- Test Case 5: Files with multiple dots ---");
+console.log("archive.tar.gz extension: '" + getFileExtension("archive.tar.gz") + "'");
+console.log("backup.old.zip extension: '" + getFileExtension("backup.old.zip") + "'");
+```
+
+</details>
+
+<details>
+<summary><b>Solution: Method 2 - Using lastIndexOf() with substring()</b></summary>
+
+```javascript
+/*
+ * Experiment 22: Get File Extension (Using lastIndexOf - Smart approach)
+ * More efficient extraction of file extensions
+ */
+
+function getFileExtension(filename) {
+    // Find last dot position
+    const lastDotIndex = filename.lastIndexOf(".");
+    
+    // If no dot found, return empty string
+    if (lastDotIndex === -1 || lastDotIndex === filename.length - 1) {
+        return "";
+    }
+    
+    // Extract from after the last dot
+    return filename.substring(lastDotIndex + 1).toLowerCase();
+}
+
+// With Optional Chaining and modern approach
+function getFileTypeModern(filename) {
+    const ext = getFileExtension(filename);
+    
+    const typeMap = {
+        jpg: "Image", jpeg: "Image", png: "Image", gif: "Image", bmp: "Image",
+        pdf: "Document", doc: "Document", docx: "Document", xls: "Document", xlsx: "Document",
+        js: "Code", py: "Code", java: "Code", cpp: "Code", html: "Code",
+        mp4: "Video", avi: "Video", mkv: "Video", mov: "Video",
+        mp3: "Audio", wav: "Audio", flac: "Audio", m4a: "Audio"
+    };
+    
+    return typeMap[ext] || "Unknown";
+}
+
+function getFileInfoModern(filename) {
+    return {
+        filename: filename,
+        extension: getFileExtension(filename),
+        type: getFileTypeModern(filename),
+        name: filename.substring(0, filename.lastIndexOf(".") || filename.length)
+    };
+}
+
+// TEST CASES
+console.log("--- Test Case 1: Various file types ---");
+const testFiles = [
+    "photo.jpg",
+    "resume.DOCX",
+    "script.js",
+    "video.mp4",
+    "music.mp3",
+    "archive.tar.gz",
+    "Makefile",
+    "README.md"
+];
+
+testFiles.forEach(f => {
+    const info = getFileInfoModern(f);
+    console.log("File: " + info.filename + 
+                " | Ext: '" + info.extension + "'" + 
+                " | Type: " + info.type);
+});
+
+console.log("\n--- Test Case 2: Edge cases ---");
+console.log("Hidden file (.bashrc): ext='" + getFileExtension(".bashrc") + "'");
+console.log("Dot at end (file.): ext='" + getFileExtension("file.") + "'");
+console.log("Multi-dot (data.backup.sql): ext='" + getFileExtension("data.backup.sql") + "'");
+```
+
+</details>
+
+**Key Learning Points:**
+- Use `split()` with array access to extract extension (Method 1)
+- Use `lastIndexOf()` to find last occurrence more efficiently (Method 2)
+- Case-insensitive comparison important for consistency
+- Handle edge cases: no extension, multiple dots, hidden files
+- Object/Map useful for extension-type mapping
+
+---
+
+## 🎯 Experiments Summary
+
+✅ **Experiment 22:** Extract and categorize file extensions
 
 ---
 
