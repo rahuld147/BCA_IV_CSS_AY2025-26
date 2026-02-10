@@ -390,70 +390,198 @@ console.log(discount);  // 100
 
 ---
 
-## 💻 Practical Session (1h 15min)
+## � MANDATORY PRACTICAL EXPERIMENTS
 
-### Exercise 1.1: Hello World in Different Environments
+### ✅ **Experiment 1: JavaScript Program to Print Hello World**
 
-**Goal:** Run JavaScript code in 3 environments
+**MANDATORY PRACTICAL REQUIREMENT:** Official Experiment #1 (Unit 1)  
+Display text output using JavaScript in different execution environments.
 
-**Method 1: Browser Console**
+<details>
+<summary><b>Solution: Method 1 - Browser Console</b></summary>
+
 ```javascript
-// Open browser → F12 → Console tab
-console.log("Hello from Browser!");
+/*
+ * Experiment 1: Print Hello World (Browser Console approach)
+ * Run JavaScript directly in browser console
+ */
+
+// Open browser F12 → Console tab → type or paste this:
+
+console.log("Hello World");
+console.log("Welcome to JavaScript!");
 console.log(42);
 console.log(3.14);
+
+// TEST CASES
+console.log("--- Test Cases ---");
+console.log("Test 1: " + "Hello World");
+console.log("Test 2: String output");
+console.log("Test 3: Number output - " + 100);
+
+// Output will appear directly in console
 ```
 
-**Method 2: Node.js (CLI)**
-```bash
-# Open terminal/PowerShell
-node
-console.log("Hello from Node.js!");
-.exit  # Exit Node REPL
-```
+</details>
 
-**Method 3: HTML File**
-```html
+<details>
+<summary><b>Solution: Method 2 - HTML File with Script Tag</b></summary>
+
+```javascript
+/*
+ * Experiment 1: Print Hello World (HTML file approach)
+ * Create HTML file with embedded JavaScript
+ */
+
+// Save as hello_world.html and open in browser:
+
+/*
 <!DOCTYPE html>
 <html>
 <head>
-    <title>First JavaScript Program</title>
+    <title>Hello World Program</title>
 </head>
 <body>
     <h1>My First JavaScript Program</h1>
+    
     <script>
-        console.log("Hello from HTML file!");
+        console.log("Hello World from HTML file");
         alert("Welcome to JavaScript!");
+        document.write("Hello World - Written to page!");
     </script>
 </body>
 </html>
+*/
+
+// This shows output in:
+// 1. Browser console (console.log)
+// 2. Alert box (alert)
+// 3. Page content (document.write)
+
+// TEST CASES
+console.log("Hello");
+console.log("World");
+alert("First Alert Box");
 ```
 
-### Exercise 1.2: Working with Numbers
+</details>
 
-**Goal:** Understand number operations
+**Key Learning Points:**
+- `console.log()` displays output in browser developer console
+- `alert()` shows a dialog box
+- `document.write()` adds content to the page
+- Method 1 is best for testing; Method 2 is for web pages
 
-**Instructions:** In browser console, type and observe:
+---
+
+### ✅ **Experiment 2: JavaScript Program to Add Two Numbers**
+
+**MANDATORY PRACTICAL REQUIREMENT:** Official Experiment #2 (Unit 1)  
+Perform addition operation on two numbers and display result.
+
+<details>
+<summary><b>Solution: Method 1 - Manual Input and Arithmetic</b></summary>
 
 ```javascript
-// Arithmetic
-console.log(100 + 50);
-console.log(100 - 50);
-console.log(100 * 2);
-console.log(100 / 4);
+/*
+ * Experiment 2: Add Two Numbers (Manual variable assignment)
+ * Add two numbers and display result
+ */
 
-// Order of operations (PEMDAS)
-console.log(2 + 3 * 4);     // 14 or 20? (20 - multiplication first)
-console.log((2 + 3) * 4);   // 20 (parentheses override)
+// Assign two numbers to variables
+const number1 = 10;
+const number2 = 20;
 
-// Decimal numbers
-console.log(0.1 + 0.1);     // 0.2 ✓
-console.log(0.1 + 0.2);     // 0.30000000000000004 ✗ (floating point!)
+// Add them
+const sum = number1 + number2;
 
-// Special values
-console.log(1 / 0);         // Infinity
-console.log(0 / 0);         // NaN
+// Display result
+console.log(number1 + " + " + number2 + " = " + sum);
+
+// TEST CASES
+console.log("--- Test Case 1: Positive numbers ---");
+const num1 = 100;
+const num2 = 50;
+const result1 = num1 + num2;
+console.log(num1 + " + " + num2 + " = " + result1);
+
+console.log("\n--- Test Case 2: Mixed positive/negative ---");
+const a = 75;
+const b = -25;
+const result2 = a + b;
+console.log(a + " + " + b + " = " + result2);
+
+console.log("\n--- Test Case 3: Decimal numbers ---");
+const x = 3.5;
+const y = 2.7;
+const result3 = x + y;
+console.log(x + " + " + y + " = " + result3);
 ```
+
+**Output:**
+```
+10 + 20 = 30
+--- Test Case 1: Positive numbers ---
+100 + 50 = 150
+--- Test Case 2: Mixed positive/negative ---
+75 + -25 = 50
+--- Test Case 3: Decimal numbers ---
+3.5 + 2.7 = 6.2
+```
+
+</details>
+
+<details>
+<summary><b>Solution: Method 2 - User Input with prompt()</b></summary>
+
+```javascript
+/*
+ * Experiment 2: Add Two Numbers (User input approach)
+ * Get numbers from user and add them
+ */
+
+// Get input from user
+const input1 = prompt("Enter first number:");
+const input2 = prompt("Enter second number:");
+
+// Convert strings to numbers
+const num1 = parseFloat(input1);
+const num2 = parseFloat(input2);
+
+// Add them
+const sum = num1 + num2;
+
+// Display result
+console.log(num1 + " + " + num2 + " = " + sum);
+alert("Sum: " + sum);
+
+// Alternatively using Number():
+const number1 = Number(prompt("Enter first number:"));
+const number2 = Number(prompt("Enter second number:"));
+const total = number1 + number2;
+console.log("Total: " + total);
+
+// TEST CASES (simulated)
+console.log("--- Test Case 1: 15 + 25 ---");
+const test1a = 15;
+const test1b = 25;
+console.log("Result: " + (test1a + test1b));
+
+console.log("\n--- Test Case 2: 100 + 200 ---");
+const test2a = 100;
+const test2b = 200;
+console.log("Result: " + (test2a + test2b));
+```
+
+</details>
+
+**Key Learning Points:**
+- `parseFloat()` converts string to decimal number
+- `Number()` also converts to number
+- `parseInt()` converts to integer (removes decimals)
+- Method 1 is simpler for testing
+- Method 2 gets user input (interactive)
+
 
 ### Exercise 1.3: String Operations
 
@@ -497,6 +625,13 @@ console.log(Boolean(0));    // false
 console.log(Boolean(""));   // false
 console.log(Boolean("text"));// true
 ```
+
+---
+
+## 📋 Practice Checklist
+
+- [x] Experiment 1: Print Hello World (2 methods)
+- [x] Experiment 2: Add Two Numbers (2 methods)
 
 ### Exercise 1.5: Real-World Scenario - Fruit Stand Billing
 
