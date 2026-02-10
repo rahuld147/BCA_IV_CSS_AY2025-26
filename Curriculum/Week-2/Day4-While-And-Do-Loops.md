@@ -576,6 +576,109 @@ Find first even number sqrt(n) > 10
 
 ---
 
+## 📝 Experiment 16: Check Leap Year
+
+**Objective:** Use conditional logic to determine if a year is a leap year  
+**Mandatory Practical Requirement:** Official Experiment #16 (Unit 2)  
+**Learning:** Complex conditional logic with multiple conditions using && and ||
+
+**Leap Year Rules:**
+- Divisible by 4 → Leap year
+- BUT if divisible by 100 → NOT a leap year
+- BUT if divisible by 400 → IS a leap year
+
+<details>
+  <summary><strong>Click to reveal solutions</strong></summary>
+
+### Method 1: Step-by-Step Conditional Logic
+
+```javascript
+// Experiment 16: Check if a year is a leap year
+// Method 1: Using nested if-else logic
+
+const year = 2024;  // Change this to test
+
+let isLeapYear;
+
+if (year % 400 === 0) {
+    // Divisible by 400 = Leap year
+    isLeapYear = true;
+} else if (year % 100 === 0) {
+    // Divisible by 100 but not 400 = NOT a leap year
+    isLeapYear = false;
+} else if (year % 4 === 0) {
+    // Divisible by 4 but not 100 = Leap year
+    isLeapYear = true;
+} else {
+    // Not divisible by 4 = NOT a leap year
+    isLeapYear = false;
+}
+
+if (isLeapYear) {
+    console.log(year + " is a leap year");
+} else {
+    console.log(year + " is not a leap year");
+}
+
+// Example outputs:
+// 2024 is a leap year
+// 2023 is not a leap year
+// 1900 is not a leap year
+// 2000 is a leap year
+```
+
+### Method 2: Using Combined Boolean Logic (Smart Way)
+
+```javascript
+// Experiment 16: Check leap year using combined conditions
+// Method 2: Single condition using && and ||
+
+const year = 2024;
+
+const isLeapYear = (year % 400 === 0) || (year % 4 === 0 && year % 100 !== 0);
+
+if (isLeapYear) {
+    console.log(year + " is a leap year");
+} else {
+    console.log(year + " is not a leap year");
+}
+
+// Or as a reusable function:
+const checkLeapYear = (yr) => (yr % 400 === 0) || (yr % 4 === 0 && yr % 100 !== 0);
+
+console.log("2024 is leap: " + checkLeapYear(2024));  // true
+console.log("2023 is leap: " + checkLeapYear(2023));  // false
+console.log("2000 is leap: " + checkLeapYear(2000));  // true
+console.log("1900 is leap: " + checkLeapYear(1900));  // false
+```
+
+### Test Cases
+
+```javascript
+// Comprehensive leap year tests
+const testYears = [
+    { year: 2024, expected: true },   // Divisible by 4
+    { year: 2023, expected: false },  // Not divisible by 4
+    { year: 2000, expected: true },   // Divisible by 400
+    { year: 1900, expected: false },  // Divisible by 100 but not 400
+    { year: 2004, expected: true },   // Divisible by 4
+    { year: 2001, expected: false },  // Random year
+];
+
+console.log("Year | Is Leap | Expected | Match");
+console.log("-----|---------|----------|------");
+
+testYears.forEach(test => {
+    const result = (test.year % 400 === 0) || (test.year % 4 === 0 && test.year % 100 !== 0);
+    const match = result === test.expected ? "✓" : "✗";
+    console.log(test.year + "  | " + (result ? "Yes" : "No") + "     | " + (test.expected ? "Yes" : "No") + "      | " + match);
+});
+```
+
+</details>
+
+---
+
 ## ✅ Checklist
 
 - [ ] Understand while loops
@@ -585,6 +688,7 @@ Find first even number sqrt(n) > 10
 - [ ] Can use break statement
 - [ ] Can use continue statement
 - [ ] Completed Experiments 11-12
+- [ ] Completed Experiment 16
 - [ ] Completed Exercises 4.3-4.5
 - [ ] Challenge questions attempted
 
