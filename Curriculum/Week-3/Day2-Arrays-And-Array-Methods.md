@@ -53,6 +53,8 @@ const empty = [];                         // Empty array
 
 ### 2. Accessing Array Elements
 
+**Index** (or **indexing**): A numeric position in an array, starting from 0. For example, in the array `["Red", "Green", "Blue"]`, the index of "Red" is 0, "Green" is 1, and "Blue" is 2. You access an element using square bracket notation: `array[index]`.
+
 Use **index** (position) to access elements:
 
 ```javascript
@@ -210,6 +212,8 @@ console.log(extended);  // [1, 2, 10, 20]
 ```
 
 #### find() and findIndex() — Search for Elements
+
+**Reference** (vs value): In JavaScript, primitive values (numbers, strings, booleans) are passed by value (copied), but objects and arrays are passed by reference (the same object is accessed). This means assigning an array to a variable creates a reference to the same array, not a copy.
 
 `find()` returns the **first element** that matches a condition. `findIndex()` returns the **index** of that element. Both stop searching after the first match.
 

@@ -10,6 +10,10 @@
 
 ### 1. What is an Object?
 
+**Object literal**: The syntax for creating an object by directly writing its properties and values in curly braces `{ }`. Example: `const person = { name: "Alice", age: 25 };` — the entire expression is an object literal.
+
+**This** (keyword): A special keyword that refers to the object on which a method is being called. Inside an object's method, `this` gives you access to other properties of that same object. Example: In a `greet()` method, `this.name` refers to the name property of the object.
+
 An **object** is a collection of related properties and their values, grouped together.
 
 **Real-World Analogy:** Object is like a person
@@ -197,6 +201,8 @@ console.log(company.employees[0].name);       // "Alice"
 ### 7. Object Mutability
 
 **Mutability** means the ability to be changed after creation. In JavaScript, understanding mutability is critical because objects and arrays behave very differently from primitive values (numbers, strings, booleans).
+
+**Immutable** (or "immutability"): Unable to be changed. Primitive values like numbers and strings are immutable — once created, they cannot be modified. String methods like `.toUpperCase()` don't change the original string; they return a new string. Objects and arrays, on the other hand, are mutable — you can change their contents without creating new ones.
 
 #### Primitives are Immutable
 
@@ -793,9 +799,75 @@ When ready for Week 4:
 
 ---
 
+## 📚 Week 3 Terminology Reference
+
+For consistency, all key terms introduced in Week 3 are defined at first use across the five days:
+
+| Term | Day Introduced | Definition | Example |
+|------|---|---|---|
+| **Functions as Values** | Day 1 | Functions can be stored in variables and passed around like any other value | `const add = function(a, b) { return a + b; };` |
+| **Declaration Notation** | Day 1 | Statement that creates a function with the `function` keyword at the start | `function greet(name) { }` |
+| **Hoisting** | Day 1 | Behavior of moving declarations to top of scope before code runs | Function declarations can be called before they're defined |
+| **Callback** | Day 1 | Function passed as argument to another function, to be called later | `performOperation(10, 5, add)` |
+| **Scope** | Day 1 | Region where a variable can be accessed | Global, function, or block scope |
+| **Lexical Environment** | Day 1 | Set of variable bindings available at a location (defines closure) | Closure "remembers" lexical environment |
+| **Closure** | Day 1 | Function that "remembers" variables from its outer scope | Inner function accessing outer function's variables |
+| **Data Set** | Day 2 | Structured collection of related data | List of student names, product prices |
+| **Data Structure** | Day 2 | Special format for organizing and storing collections | Arrays and objects |
+| **Array** | Day 2 | Ordered list of values accessed by numeric index (0-based) | `const fruits = ["Apple", "Banana"];` |
+| **Index** / **Indexing** | Day 2 | Numeric position in array (starting at 0) | `array[0]` accesses first element |
+| **Reference** (vs Value) | Day 2 | Objects/arrays are accessed by reference (same object); primitives by value (copied) | Assigning array creates reference, not copy |
+| **Immutable** | Day 5 | Unable to be changed after creation; strings are immutable | String methods return new string |
+| **Mutable** | Day 2/5 | Able to be changed after creation; objects and arrays are mutable | Can modify array elements directly |
+| **Object Literal** | Day 5 | Syntax for creating object by writing properties in curly braces | `const person = { name: "Alice", age: 25 };` |
+| **Property** | Day 5 | Named piece of information in an object | `person.name` or `student.studentId` |
+| **Method** | Day 5 | Function stored as object property | `person.greet()` method |
+| **This** (keyword) | Day 5 | Refers to the object on which a method is being called | Inside method: `this.property` accesses object's property |
+| **Nesting** | Day 5 | One data structure placed inside another | Object containing objects or arrays |
+| **Memoization** | Day 1 | Optimization technique where function "remembers" previous results | Cache stores computed values |
+| **Mutability** | Day 5 | Ability to be changed after creation | Strings immutable, objects/arrays mutable |
+
+---
+
+## 🔗 Week 3 Content Organization Map
+
+**Day 1: Functions as Values**
+- Functions can be stored in variables and passed around
+- Understanding declaration notation vs expressions
+- Learning closures and scope chains
+- Using functions as callbacks/parameters
+
+**Day 2: Arrays**
+- Understanding data sets and data structures
+- Creating and accessing arrays with indexes
+- Modifying arrays with push, pop, shift, unshift
+- Array methods: slice, splice, find, indexOf
+
+**Day 3: Strings**
+- Strings as sequences of characters
+- String case conversion
+- Finding and extracting substrings
+- String methods: includes, indexOf, substring, slice
+
+**Day 4: Advanced Strings**
+- Reversing strings (3 approaches)
+- Capitalizing strings
+- Template literals for interpolation
+- String validation and searching
+
+**Day 5: Objects & Integration**
+- Objects as key-value collections
+- Object properties and methods
+- Using `this` keyword in methods
+- Understanding mutability and references
+- Building comprehensive integration project
+
+---
+
 **File:** `Curriculum/Week-3/Day5-Objects-And-Integration.md`  
 **Status:** Complete ✅  
-**Last Updated:** February 2026
+**Last Updated:** February 2026  
+**Audit Status:** Terminology consolidated, all terms defined at first use ✅
 
 ---
 

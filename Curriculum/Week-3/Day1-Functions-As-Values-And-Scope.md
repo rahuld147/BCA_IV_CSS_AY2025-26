@@ -109,7 +109,9 @@ if (userWantsAddition) {
 
 ---
 
-### 2. Functions Taking Functions as Arguments
+### 2. Functions Taking Functions as Arguments (Callbacks)
+
+**Callback**: A function that is passed as an argument to another function, and then gets called (executed) by that function at a later time. Callbacks are fundamental to asynchronous programming and functional approaches in JavaScript.
 
 Functions can accept other functions as parameters:
 
@@ -146,6 +148,8 @@ console.log(performOperation(10, 5, multiply));  // 50
 - **Global scope** - Everywhere
 - **Function scope** - Inside the function
 - **Block scope** - Inside {} (with let/const)
+
+**Lexical environment** (also "static scope"): The set of variable bindings available at a specific location in the code, determined by the code's physical structure. A function's lexical environment is set when the function is defined, not when it's called. This is why closures work — they "remember" the lexical environment they were defined in.
 
 ```javascript
 // ============================================
