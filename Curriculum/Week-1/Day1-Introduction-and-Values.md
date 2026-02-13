@@ -177,7 +177,7 @@ console.log(0.1 + 0.2);   // 0.30000000000000004 (floating-point quirk)
 
 **String Features:**
 ```javascript
-// Length
+// Length property
 console.log("Hello".length);      // 5
 
 // Concatenation (combining strings)
@@ -187,11 +187,9 @@ console.log("Hello" + " " + "World");  // "Hello World"
 "Line 1\nLine 2"    // \n = newline
 "Tab\tseparated"    // \t = tab
 "Quote\"inside"     // \" = literal quote
-
-// Case conversion (preview—more in Week 3)
-"HELLO".toLowerCase()   // "hello"
-"hello".toUpperCase()   // "HELLO"
 ```
+
+**Note:** Additional string methods (toLowerCase, toUpperCase, substring, indexOf, etc.) are covered in detail in **Day 2 Theory** section.
 
 **Real-World Example: User Greeting**
 ```javascript
@@ -599,10 +597,10 @@ console.log(message.length);                 // 5
 console.log(message[0]);                     // "H" (first character)
 console.log(message[4]);                     // "o" (fifth character)
 
-// String methods
-console.log("UPPERCASE".toLowerCase());      // "uppercase"
-console.log("lowercase".toUpperCase());      // "LOWERCASE"
-console.log("hello world".length);           // 11
+// Using string index
+const word = "JavaScript";
+console.log(word[0]);                        // "J" (first character)
+console.log(word[word.length - 1]);          // "t" (last character)
 ```
 
 ### Exercise 1.4: Type Conversion in Action

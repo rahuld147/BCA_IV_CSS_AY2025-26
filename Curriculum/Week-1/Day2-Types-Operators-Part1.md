@@ -67,7 +67,7 @@ console.log(price * 1.18);      // With 18% tax
 ```javascript
 const single = 'Hello';
 const double = "World";
-const backtick = `JavaScript`;     // Template literals (more on Day 3)
+const backtick = `JavaScript`;     // Backticks for strings and template literals
 const empty = "";                  // Empty string (length = 0)
 
 // Escape sequences

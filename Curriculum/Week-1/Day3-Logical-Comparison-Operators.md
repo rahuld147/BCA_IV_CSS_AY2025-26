@@ -7,6 +7,8 @@
 - **1:30-2:45:** Practical: Boolean Logic Puzzles
 - **2:45-3:00:** Q&A & Assignment
 
+**Note:** String template literals with backticks are covered in **Day 2** (see "Creating Strings" section). Today we focus on comparison operators (===, <, >, etc.) and logical operators (&&, ||, !).
+
 ---
 
 ## 📖 Theory Content
