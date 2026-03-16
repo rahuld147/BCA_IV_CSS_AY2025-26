@@ -83,11 +83,44 @@ console.log("Array containig unique values (created using reduce(): ");
 console.log(uniqueUsingReduce);
 // 4. Sorting Arrays
 // Numeric sorting (arrays)
+const numArr = [ 54, 4, 7, 3, 87, 2, 67, 9 ];
+console.log("Unsorted Numeric Array: ", numArr);
+const sortedNumArr = [...numArr].sort((a, b) => a - b);
+console.log("Unsorted Numeric Array: ", numArr);
+console.log("Numeric Array after sorting in Ascending Order: ", sortedNumArr);
+// sortedNumArr.push(90);
+console.log("Asc: ", sortedNumArr);
+
 // Reverse order sorting
+const sortedNumArrInDesc = [...numArr].sort((a,b) => b - a);
+console.log("Numeric Array after sorting in Descending Order: ", sortedNumArrInDesc);
+console.log("Desc: ", sortedNumArrInDesc);
+
 // String sorting (alphabetical)
+const words = ["potato", "Zebra", "cow", "apple", "Cow", "banana", "FISH"];
+console.log("Words before sorting:", words);
+const sortedWords = [...words].sort();
+const sortedWordsDesc = [...words].sort().reverse();
+console.log("Sorted Words in Asc:", sortedWords);
+console.log("Sorted Words in Desc:", sortedWordsDesc);
+
 // Case-insensitive sorting
+const sortedWordsLC = words.sort((a,b) => a.localeCompare(b));
+console.log("Sorted Words using localeCompare() :", sortedWordsLC);
+const ciSortedWords = words.sort((a,b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+console.log("case-insensitive Sorted Words:", ciSortedWords);
 
 // 5. Sorting Objects
-// Sort by property
+const students = [
+    {name: "Rajat", marks: 78},
+    {name: "Sanjay", marks: 64},
+    {name: "Priya", marks: 89},
+    {name: "Akash", marks: 75},
+];
+// Sort by property:
 // Sort in ascending order (numbers)
+const byMarks = students.sort((a,b) => b.marks - a.marks);
+console.log("Sorted object by marks: ",byMarks);
 // Sort by name
+const byName = students.sort((a,b) => a.name.localeCompare(b.name));
+console.log("Sorted object by name: ",byName);
