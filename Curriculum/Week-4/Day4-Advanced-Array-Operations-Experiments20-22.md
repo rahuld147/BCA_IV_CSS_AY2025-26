@@ -113,6 +113,50 @@ console.log(unique);  // ["apple", "banana", "cherry"]
 
 For numbers, `(a, b) => a - b` sorts ascending, and `(a, b) => b - a` sorts descending.
 
+#### Understanding `localeCompare()`
+
+The `localeCompare()` method is a built-in JavaScript String function used to compare two strings in a locale-aware way. It's essential for proper alphabetical sorting, especially when dealing with strings that contain special characters, uppercase/lowercase letters, or non-English characters.
+
+**What does it do?**
+- Compares two strings and returns a number:
+  - **Negative number** (-1): First string comes before the second string alphabetically
+  - **Zero** (0): Both strings are equal
+  - **Positive number** (1): First string comes after the second string alphabetically
+
+**Why use it instead of simple comparison operators?**
+- Simple operators (`<`, `>`) compare character codes directly, which doesn't handle uppercase/lowercase properly
+- `localeCompare()` respects alphabetical order according to language rules
+- It handles accented characters and special characters correctly
+
+**Syntax:**
+```javascript
+string1.localeCompare(string2)
+```
+
+**Examples:**
+```javascript
+// Example 1: Basic alphabetical comparison
+"apple".localeCompare("banana");        // returns -1 (apple comes before banana)
+"zebra".localeCompare("apple");         // returns 1 (zebra comes after apple)
+"apple".localeCompare("apple");         // returns 0 (they are equal)
+
+// Example 2: Case-insensitive comparison
+"Apple".localeCompare("banana");        // returns -1 (correct alphabetical order)
+"APPLE".localeCompare("apple");         // returns -1 (uppercase comes first by default)
+
+// Example 3: For sorting with proper alphabetical order
+const words = ["Zebra", "apple", "Banana"];
+const sorted = words.sort((a, b) => a.localeCompare(b));
+console.log(sorted);  // ["apple", "Banana", "Zebra"]
+
+// Example 4: Case-insensitive sorting
+const words = ["Zebra", "apple", "Banana"];
+const sorted = words.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+console.log(sorted);  // ["apple", "Banana", "Zebra"] - all treated equally
+```
+
+Now let's look at practical sorting examples:
+
 ```javascript
 // Numeric sorting (numbers)
 const numbers = [3, 1, 4, 1, 5, 9, 2];
